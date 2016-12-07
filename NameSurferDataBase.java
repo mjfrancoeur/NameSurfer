@@ -17,32 +17,31 @@ import java.io.*;
  */
 
 public class NameSurferDataBase implements NameSurferConstants {
-	
-/* Constructor: NameSurferDataBase(filename) */
-/**
- * Creates a new NameSurferDataBase and initializes it using the
- * data in the specified file.  The constructor throws an error
- * exception if the requested file does not exist or if an error
- * occurs as the file is being read.
- */
+
+	/* Constructor: NameSurferDataBase(filename) */
+	/**
+	 * Creates a new NameSurferDataBase and initializes it using the data in the
+	 * specified file. The constructor throws an error exception if the
+	 * requested file does not exist or if an error occurs as the file is being
+	 * read.
+	 */
 	public NameSurferDataBase(String filename) {
 		loadData(filename);
 	}
-	
-	
+
 	/* Method: loadData(filename) */
 	/**
 	 * Opens file with BufferedReader rd
 	 */
 	private void loadData(String filename) {
-		
+
 		entriesMap = new HashMap<String, NameSurferEntry>();
-		
+
 		try {
 			BufferedReader rd = new BufferedReader(new FileReader(filename));
-			while(true) {
+			while (true) {
 				String line = rd.readLine();
-				if(line == null) {
+				if (line == null) {
 					break;
 				} else {
 					NameSurferEntry entry = new NameSurferEntry(line);
@@ -50,35 +49,25 @@ public class NameSurferDataBase implements NameSurferConstants {
 				}
 			}
 			rd.close();
-		} catch(IOException ex) {
+		} catch (IOException ex) {
 			throw new ErrorException(ex);
 		}
 	}
-	
-/* Method: findEntry(name) */
-/**
- * Returns the NameSurferEntry associated with this name, if one
- * exists.  If the name does not appear in the database, this
- * method returns null.
- */
+
+	/* Method: findEntry(name) */
+	/**
+	 * Returns the NameSurferEntry associated with this name, if one exists. If
+	 * the name does not appear in the database, this method returns null.
+	 */
 	public NameSurferEntry findEntry(String name) {
-		if(entriesMap.get(name) == null) {
+		if (entriesMap.get(name) == null) {
 			return null;
-		} else { 
+		} else {
 			return entriesMap.get(name);
 		}
 	}
-	
-	
-	/*private instance variables */
+
+	/* private instance variables */
 	private HashMap<String, NameSurferEntry> entriesMap;
-	
-	
+
 }
-
-
-
-
-
-
-
